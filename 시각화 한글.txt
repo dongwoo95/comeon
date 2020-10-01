@@ -1,0 +1,25 @@
+# 아래 코드는 seaborn, matplotlib으로 시각화를 진행할때 데이터에 한글이 들어있다면 copy&paste 한 뒤 사용하시면 됩니다. 
+# 이미지 상에 들어있는 한글을 표시하기 위한 한글 폰트를 지정하고, 필요한 라이브러리를 불러들이는 코드입니다. 
+import matplotlib
+from matplotlib import font_manager, rc
+import platform
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 이미지 한글 표시 설정
+if platform.system() == 'Windows':  # 윈도우인 경우 맑은고딕
+    font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
+    rc('font', family=font_name)
+else:    # Mac 인 경우 애플고딕
+    rc('font', family='AppleGothic')
+
+#그래프에서 마이너스 기호가 표시되도록 하는 설정입니다.
+matplotlib.rcParams['axes.unicode_minus'] = False   
+
+
+sns.swarmplot(data = player_stat, x = '팀', y = '출루율')
+sns.boxplot(data = player_stat, x = '팀', y = '출루율',
+            showcaps=False,             # 박스 상단 가로라인 보이지 않기
+            whiskerprops={'linewidth':0}, # 박스 상단 세로 라인 보이지 않기 
+            showfliers=False,           # 박스 범위 벗어난 아웃라이어 표시하지 않기
+            boxprops={'facecolor':'None'}, # 박스 색상 지우기
